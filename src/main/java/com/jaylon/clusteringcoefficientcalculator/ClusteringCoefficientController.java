@@ -1,4 +1,6 @@
 package com.jaylon.clusteringcoefficientcalculator;
+
+import com.jaylon.clusteringcoefficientcalculator.exceptions.ValidationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,24 @@ public class ClusteringCoefficientController {
     public String calculateCoefficient(@RequestParam("neighbors") int neighbors,
                                        @RequestParam("links") int links,
                                        Model model) {
+
+        if (neighbors < 0 || links < 0) {
+            throw new ValidationException("Number of neighbors and links must be non-negative.");
+        }
+        if (neighbors == 0) {
+            throw new ValidationException("Number of neighbors cannot be zero.");
+        }
+        if (links > (neighbors * (neighbors - 1)) / 2) {
+            if (neighbors == 1) {
+                throw new ValidationException("Number of links exceeds the maximum possible for " + neighbors + " neighbor.");
+            }
+            throw new ValidationException("Number of links exceeds the maximum possible for " + neighbors + " neighbors.");
+        }
+        if (links == 0) {
+            return "0";
+        }
+
+
         // Calculate clustering coefficient
         String coefficient = calculateClusteringCoefficient(neighbors, links);
 
@@ -23,15 +43,11 @@ public class ClusteringCoefficientController {
 
     // Method to calculate the clustering coefficient
     private String calculateClusteringCoefficient(int neighbors, int links) {
-        // Your logic to calculate the clustering coefficient goes here
-        // Calculate the clustering coefficient
-
         int numerator = 2 * links;
         int k2 = neighbors - 1;
         int denominator = neighbors * k2;
         double coefficient = (double) numerator / denominator;
 
-        // Output the result
         if (coefficient != 0) {
             int[] fractionArr = reduceFraction(numerator, denominator);
             String fraction = fractionArr[0] + "/" + fractionArr[1];
@@ -42,19 +58,14 @@ public class ClusteringCoefficientController {
     }
 
     // Function to reduce a fraction to its lowest form
-    static int[] reduceFraction(int x, int y)
-    {
-        int d;
-        d = __gcd(x, y);
-
+    static int[] reduceFraction(int x, int y) {
+        int d = __gcd(x, y);
         x = x / d;
         y = y / d;
-
         return new int[] {x, y};
     }
 
-    static int __gcd(int a, int b)
-    {
+    static int __gcd(int a, int b) {
         if (b == 0)
             return a;
         return __gcd(b, a % b);
