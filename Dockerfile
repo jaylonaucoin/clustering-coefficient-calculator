@@ -18,7 +18,7 @@ FROM openjdk:11-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file from the build stage
-COPY --from=build /app/target/clustering-coefficient-calculator-0.0.1-SNAPSHOT.jar /app/clustering-coefficient-calculator.jar
+COPY --from=build /app/target/clustering-coefficient-calculator.jar /app/clustering-coefficient-calculator.jar
 
 # Run the JAR file
 CMD ["java", "-jar", "clustering-coefficient-calculator.jar"]
