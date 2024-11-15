@@ -16,6 +16,4 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }
-
-    // Add more exception handler methods for other types of exceptions
 }
