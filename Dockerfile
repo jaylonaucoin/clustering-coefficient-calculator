@@ -1,5 +1,5 @@
 # Step 1: Use a smaller base image with Maven and OpenJDK 17 (Alpine version)
-FROM maven:3.8.6-openjdk-17-alpine AS build
+FROM maven:3.8.6-eclipse-temurin-17-alpine AS build
 
 # Set the working directory
 WORKDIR /app
