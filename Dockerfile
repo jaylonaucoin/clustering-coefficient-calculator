@@ -1,5 +1,5 @@
-# Step 1: Use a base image with Maven or Gradle
-FROM openjdk:17-slim AS build
+# Step 1: Use a smaller base image with Maven and OpenJDK 17 (Alpine version)
+FROM maven:3.8.6-openjdk-17-alpine AS build
 
 # Set the working directory
 WORKDIR /app
@@ -11,8 +11,8 @@ COPY src ./src
 # Build the application (creates the target/clustering-coefficient-calculator.jar)
 RUN mvn clean package -DskipTests
 
-# Step 2: Use a smaller base image for the final container
-FROM openjdk:17-slim
+# Step 2: Use an even smaller base image for the final container (OpenJDK 17 Alpine)
+FROM openjdk:17-alpine
 
 # Set the working directory for the final image
 WORKDIR /app
