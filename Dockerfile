@@ -1,5 +1,5 @@
 # Step 1: Use a base image with Maven or Gradle
-FROM maven:3.8.6-eclipse-temurin-17 AS build
+FROM openjdk:17-slim AS build
 
 # Set the working directory
 WORKDIR /app
