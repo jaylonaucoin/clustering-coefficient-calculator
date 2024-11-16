@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clustering Coefficient Result</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="/img/logo.png">
 </head>
-<body class="bg-gray-100">
-<div class="container mx-auto px-4 py-8 max-w-lg">
-  <h1 class="text-4xl font-bold text-center text-black-600 mb-8 text-center">Clustering Coefficient Calculator</h1>
-  <img src="/img/logo.png" alt="Clustering Coefficient Calculator" class="mx-auto mb-8 w-28">
-  <div class="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
-    <h1 class="text-2xl font-bold text-center text-black-600 mb-5">Result</h1>
-    <p class="text-4xl text-center mb-8 font-bold text-green-600" th:text="${coefficient}"></p>
-    <div class="flex items-center justify-center">
-      <a href="/" class="text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-        Calculate Another
-      </a>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+<div class="flex-grow">
+  <div class="container mx-auto px-4 py-8 max-w-lg">
+    <h1 class="text-3xl sm:text-4xl font-bold text-center text-black-600 mb-6">Clustering Coefficient Calculator</h1>
+    <img src="/img/logo.png" alt="Clustering Coefficient Calculator" class="mx-auto mb-6 w-24 sm:w-28">
+    <div class="bg-white shadow-md rounded-xl px-6 sm:px-8 py-6">
+      <h1 class="text-2xl font-bold text-center text-black-600 mb-5">Result</h1>
+      <p class="text-4xl text-center mb-8 font-bold text-green-600" th:text="${coefficient}"></p>
+      <div class="flex items-center justify-center">
+        <a href="/" class="text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:px-6 rounded-full focus:outline-none focus:shadow-outline">
+          Calculate Another
+        </a>
+      </div>
     </div>
   </div>
 </div>
-<div class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
-  <div class="container mx-auto px-4 text-center">
-    <p>&copy; 2024 Jaylon AuCoin. All rights reserved.</p>
+<footer class="bg-gray-800 text-white">
+  <div class="container text-center mx-auto px-auto">
+    <p>&copy; 2024 Jaylon Aucoin. All rights reserved.</p>
   </div>
-</div>
+</footer>
 </body>
 </html>
