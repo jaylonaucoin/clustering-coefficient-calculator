@@ -1,10 +1,13 @@
 package com.jaylon.clusteringcoefficientcalculator;
 
 import com.jaylon.clusteringcoefficientcalculator.exceptions.ValidationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class ClusteringCoefficientController {
@@ -14,6 +17,7 @@ public class ClusteringCoefficientController {
                                        @RequestParam("links") int links,
                                        Model model) {
 
+        // Validation and error handling
         if (neighbors < 0 || links < 0) {
             throw new ValidationException("Number of neighbors and links must be non-negative.");
         }
@@ -30,7 +34,6 @@ public class ClusteringCoefficientController {
             return "0";
         }
 
-
         // Calculate clustering coefficient
         String coefficient = calculateClusteringCoefficient(neighbors, links);
 
@@ -39,6 +42,14 @@ public class ClusteringCoefficientController {
 
         // Return the name of the Thymeleaf template for the result page
         return "result";
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleValidationException(ValidationException ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        // Return to the form with the error message
+        return "form";
     }
 
     // Method to calculate the clustering coefficient
