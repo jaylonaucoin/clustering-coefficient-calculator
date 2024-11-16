@@ -49,7 +49,7 @@ public class ClusteringCoefficientController {
     public String handleValidationException(ValidationException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
         // Return to the form with the error message
-        return "form";
+        return "error";
     }
 
     // Method to calculate the clustering coefficient
