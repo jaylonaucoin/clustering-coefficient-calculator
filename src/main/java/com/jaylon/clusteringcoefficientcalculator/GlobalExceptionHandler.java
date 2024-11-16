@@ -14,6 +14,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleValidationException(ValidationException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
-        return "error";
+        return "index";
     }
 }
